@@ -22,7 +22,7 @@ export function createSheetsClient({ config, api }) {
         spreadsheetId: id, range: `${tab}!A1:${lastCol}1`, valueInputOption: 'RAW',
         requestBody: { values: [SHEET_HEADERS] }
       });
-    } } else {
+    } else {
   const oldHeaders = SHEET_HEADERS.slice(0, 11);
 
   const oldHeadersMatch = oldHeaders.every(
