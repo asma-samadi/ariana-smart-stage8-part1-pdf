@@ -22,9 +22,28 @@ export function createSheetsClient({ config, api }) {
         spreadsheetId: id, range: `${tab}!A1:${lastCol}1`, valueInputOption: 'RAW',
         requestBody: { values: [SHEET_HEADERS] }
       });
-    } else if (SHEET_HEADERS.some((h, i) => row[i] !== h)) {
-      throw new SheetsError('header_mismatch'); // refuse to write into a differently shaped sheet
-    }
+    } } else {
+  const oldHeaders = SHEET_HEADERS.slice(0, 11);
+
+  const oldHeadersMatch = oldHeaders.every(
+    (header, i) => row[i] === header
+  );
+
+  const extraHeadersEmpty = row
+    .slice(oldHeaders.length)
+    .every((header) => !header);
+
+  if (oldHeadersMatch && extraHeadersEmpty) {
+    await api.values.update({
+      spreadsheetId: id,
+      range: `${tab}!A1:${lastCol}1`,
+      valueInputOption: 'RAW',
+      requestBody: { values: [SHEET_HEADERS] }
+    });
+  } else if (SHEET_HEADERS.some((header, i) => row[i] !== header)) {
+    throw new SheetsError('header_mismatch');
+  }
+}
     headerOk = true;
   }
 
