@@ -1,0 +1,141 @@
+/* Design tokens. Every colour used by components comes from here, so light/dark
+   (and any future theme) is a matter of redefining these variables. */
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --navy-950: #061330;
+  --navy-900: #0b2a6f;
+  --royal-600: #1d4ed8;
+  --gold-400: #f2b544;
+
+  /* Semantic: light theme */
+  --bg: #f4f7fc;
+  --bg-alt: #e9eef8;
+  --surface: #ffffff;
+  --surface-2: #f0f4fb;
+  --text: #0b1b3a;
+  --text-muted: #44526e;
+  --border: #d5deee;          /* decorative dividers and card edges */
+  --input-border: #6b7b9e;    /* control boundaries (inputs, selects, radios, icon buttons): >= 3:1, WCAG 1.4.11 */
+  --placeholder: #5c6a86;
+  --link: #1d4ed8;
+  --focus: #1d4ed8;
+
+  --disabled-bg: #e6ebf4;
+  --disabled-text: #5d6a85;
+  --disabled-border: #b7c3dc;
+  --overlay: rgba(6, 19, 48, 0.55);
+
+  --btn-primary-bg: #0b2a6f;
+  --btn-primary-bg-hover: #0a2360;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #e4ebfa;
+  --btn-secondary-bg-hover: #d6e1f7;
+  --btn-secondary-text: #0b2a6f;
+
+  --header-bg: rgba(255, 255, 255, 0.86);
+  --banner-bg: #0b2a6f;
+  --banner-text: #e8eeff;
+
+  --tone-info-bg: #e3ecff;   --tone-info-text: #12399e;
+  --tone-warn-bg: #fff1d6;   --tone-warn-text: #6b4600;
+  --tone-ok-bg: #dcf5e6;     --tone-ok-text: #0f5b33;
+  --tone-bad-bg: #fde3e3;    --tone-bad-text: #8c1d1d;
+  --tone-neutral-bg: #e8ecf4; --tone-neutral-text: #3a4763;
+
+  --shadow-sm: 0 1px 2px rgba(11, 27, 58, 0.06), 0 1px 3px rgba(11, 27, 58, 0.08);
+  --shadow-md: 0 6px 18px rgba(11, 27, 58, 0.09);
+  --shadow-lg: 0 18px 44px rgba(11, 42, 111, 0.16);
+
+  /* Gradients (hero + footer stay deep navy in both themes) */
+  --grad-hero: linear-gradient(155deg, #061330 0%, #0b2a6f 58%, #1d4ed8 130%);
+  --grad-brand: linear-gradient(135deg, #1d4ed8 0%, #0b2a6f 100%);
+  --grad-cta: linear-gradient(120deg, #0b2a6f 0%, #1d4ed8 100%);
+  --footer-bg: #061330;
+  --footer-text: #c5d2f0;
+  --footer-heading: #ffffff;
+
+  /* Refinement (Stage 7 UI pass): gold accent line and form focus ring */
+  --accent-line: #d9981a;
+  --focus-ring: rgba(29, 78, 216, 0.22);
+  --row-hover: #f5f8fe;
+
+  /* Type */
+  --font-latin: 'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-persian: 'Vazirmatn', 'Noto Naskh Arabic', 'Segoe UI', Tahoma, Arial, sans-serif;
+  --font-body: var(--font-latin);
+  /* Arabic-script text needs more vertical room than Latin (marks above/below the line). The :lang rule at the
+     bottom of this file raises these for Dari and Pashto. */
+  --lh-body: 1.6;
+  --lh-heading: 1.2;
+  --lh-btn: 1;
+  --lh-tight: 1.2;
+
+  /* Scale */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --container: 1280px; /* header, banner, sections and footer all share this width so their edges line up */
+  --gutter: clamp(16px, 4vw, 32px);
+  --section-y: clamp(56px, 8vw, 96px);
+  --header-h: 68px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #071126;
+  --bg-alt: #0a1731;
+  --surface: #0e1c3f;
+  --surface-2: #132550;
+  --text: #eaf0ff;
+  --text-muted: #aebbd9;
+  --border: #223865;
+  --input-border: #6f84b8;
+  --placeholder: #98a8cb;
+  --link: #8fb2ff;
+  --focus: #8fb2ff;
+
+  --disabled-bg: #17264a;
+  --disabled-text: #93a3c8;
+  --disabled-border: #2f4575;
+  --overlay: rgba(2, 6, 18, 0.7);
+
+  --btn-primary-bg: #2f5fe6;
+  --btn-primary-bg-hover: #3a6cf5;
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #1a2f63;
+  --btn-secondary-bg-hover: #223b78;
+  --btn-secondary-text: #dbe6ff;
+
+  --header-bg: rgba(7, 17, 38, 0.86);
+  --banner-bg: #040b1c;
+  --banner-text: #c9d6f5;
+
+  --tone-info-bg: #16316f;   --tone-info-text: #cfe0ff;
+  --tone-warn-bg: #4a3500;   --tone-warn-text: #ffe2a3;
+  --tone-ok-bg: #0f3d27;     --tone-ok-text: #b8f0d0;
+  --tone-bad-bg: #4d1a1a;    --tone-bad-text: #ffd0d0;
+  --tone-neutral-bg: #1d2c52; --tone-neutral-text: #c9d4ee;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 22px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+
+  --footer-bg: #040b1c;
+
+  --accent-line: #f2b544;
+  --focus-ring: rgba(143, 178, 255, 0.3);
+  --row-hover: #112148;
+}
+
+/* Dari (prs) and Pashto (pus) switch the body font and the line spacing automatically.
+   fa/ps kept for any legacy markup. */
+:lang(prs), :lang(pus), :lang(fa), :lang(ps) {
+  --font-body: var(--font-persian);
+  --lh-body: 1.85;
+  --lh-heading: 1.45;
+  --lh-btn: 1.5;
+  --lh-tight: 1.5;
+}

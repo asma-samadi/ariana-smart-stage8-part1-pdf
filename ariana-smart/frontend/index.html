@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ariana Smart is an educational airline passenger-services demo inspired by Ariana Afghan Airlines. Not an official airline website." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Ariana Smart — Educational Airline Platform</title>
+    <script>
+      /* Apply the saved language (lang + dir) before first paint. Keep in sync with src/i18n/core.js. */
+      (function () {
+        try {
+          var lang = localStorage.getItem('ariana-lang');
+          var dirs = { en: 'ltr', prs: 'rtl', pus: 'rtl' };
+          if (!Object.prototype.hasOwnProperty.call(dirs, lang)) lang = 'en';
+          document.documentElement.setAttribute('lang', lang);
+          document.documentElement.setAttribute('dir', dirs[lang]);
+        } catch (e) {
+          document.documentElement.setAttribute('lang', 'en');
+          document.documentElement.setAttribute('dir', 'ltr');
+        }
+      })();
+    </script>
+    <meta name="theme-color" content="#f4f7fc" />
+    <style>
+      /* Critical paint colour so the page never flashes the wrong theme before tokens.css loads
+         (matters most in `npm run dev`, where CSS arrives with the JavaScript). Keep in sync with --bg. */
+      html { background: #f4f7fc; }
+      html[data-theme='dark'] { background: #071126; }
+    </style>
+    <script>
+      /* Apply the saved theme before first paint. Keep in sync with src/theme/core.js (a test runs this script). */
+      (function () {
+        var theme = 'light';
+        try {
+          var saved = localStorage.getItem('ariana-theme');
+          if (saved === 'light' || saved === 'dark') theme = saved;
+          else if (window.matchMedia('(prefers-color-scheme: dark)').matches) theme = 'dark';
+        } catch (e) {
+          theme = 'light';
+        }
+        var root = document.documentElement;
+        root.setAttribute('data-theme', theme);
+        var tag = document.querySelector('meta[name="theme-color"]');
+        if (tag) tag.setAttribute('content', theme === 'dark' ? '#071126' : '#f4f7fc');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

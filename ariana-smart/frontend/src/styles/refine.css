@@ -1,0 +1,187 @@
+/* Stage 7 UI refinement: restrained, professional airline styling.
+   Loaded last. Presentation only: no markup logic, tokens and logical properties throughout, so light/dark and
+   LTR/RTL keep working. Brand navy/blue is unchanged; gold is used as a thin accent line only. */
+
+/* ---- Typography ---------------------------------------------------------------------------------------- */
+body { font-size: 1rem; text-rendering: optimizeLegibility; }
+h1 { font-weight: 750; letter-spacing: -0.02em; }
+h2 { font-weight: 700; letter-spacing: -0.015em; }
+h3 { font-weight: 650; letter-spacing: -0.005em; }
+.lead, .hero-lead, .page-lead { line-height: 1.65; }
+:lang(prs) h1, :lang(pus) h1, :lang(prs) h2, :lang(pus) h2, :lang(prs) h3, :lang(pus) h3 { font-weight: 700; }
+
+/* Sentence case instead of tracked capitals (Latin too; Dari/Pashto are already neutralised in base.css). */
+.eyebrow, .hero-eyebrow, .footer-h, .logo-tag, .table th, .route-code {
+  text-transform: none; letter-spacing: 0;
+}
+.eyebrow { font-size: 0.875rem; font-weight: 650; display: inline-flex; align-items: center; gap: 0.6rem; }
+.eyebrow::before { content: ''; width: 22px; height: 2px; background: var(--accent-line); border-radius: 2px; flex: none; }
+.footer-h { font-size: 0.95rem; font-weight: 650; }
+.logo-tag { font-size: 0.75rem; font-weight: 550; }
+
+/* ---- Header & navigation -------------------------------------------------------------------------------- */
+.demo-banner { font-size: 0.8125rem; padding-block: 0.45rem; }
+.demo-banner .container { text-align: center; }
+.site-header { box-shadow: 0 1px 0 var(--border), 0 4px 14px -10px rgba(11, 27, 58, 0.25); border-bottom-color: transparent; }
+.nav-link { position: relative; border-radius: var(--radius-sm); font-weight: 550; padding: 0.55rem 0.7rem; }
+.nav-link:hover { background: transparent; color: var(--text); }
+.nav-link::after {
+  content: ''; position: absolute; inset-inline: 0.7rem; bottom: 0.1rem; height: 2px; border-radius: 2px;
+  background: var(--accent-line); transform: scaleX(0); transform-origin: center; transition: transform 0.22s var(--ease);
+}
+.nav-link:hover::after { transform: scaleX(0.4); }
+.nav-link.is-active { background: transparent; color: var(--text); font-weight: 650; }
+.nav-link.is-active::after { transform: scaleX(1); }
+/* Compact (hamburger) menu: the active item gets a gold bar on the reading-start edge instead of an underline. */
+.site-header[data-compact='true'] .nav-link { padding: 0.8rem 1rem; }
+.site-header[data-compact='true'] .nav-link::after {
+  inset-inline: 0 auto; inset-block: 0.55rem; width: 3px; height: auto; transform: scaleY(0); transform-origin: center;
+}
+.site-header[data-compact='true'] .nav-link:hover::after { transform: scaleY(0.5); }
+.site-header[data-compact='true'] .nav-link.is-active { background: var(--surface-2); }
+.site-header[data-compact='true'] .nav-link.is-active::after { transform: scaleY(1); }
+.icon-btn, .lang-select-input { border-radius: 10px; border-width: 1px; }
+.icon-btn:hover, .lang-select-input:hover { border-color: var(--link); }
+
+/* ---- Buttons -------------------------------------------------------------------------------------------- */
+.btn { border-radius: 10px; font-weight: 600; letter-spacing: 0; border-width: 1px; }
+.btn:hover { transform: none; }
+.btn-primary { box-shadow: 0 1px 2px rgba(11, 27, 58, 0.18); }
+.btn-primary:hover { box-shadow: var(--shadow-md); }
+.btn-ghost { border-color: var(--input-border); }
+.btn-ghost:hover { border-color: var(--link); }
+.btn-accent { box-shadow: 0 1px 2px rgba(11, 27, 58, 0.2); }
+.btn-accent:hover { box-shadow: 0 4px 12px rgba(242, 181, 68, 0.35); }
+.btn-lg { padding: 0.95rem 1.6rem; }
+.btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 10px; }
+
+/* ---- Cards ---------------------------------------------------------------------------------------------- */
+.card { border-radius: var(--radius-md); padding: 1.5rem; box-shadow: var(--shadow-sm); }
+.card-link:hover { transform: translateY(-2px); border-color: var(--input-border); }
+.card-link:hover .card-more svg { transform: translateX(3px); }
+[dir='rtl'] .card-link:hover .card-more svg { transform: scaleX(-1) translateX(3px); }
+.card-more svg { transition: transform 0.2s var(--ease); }
+.icon-chip { border-radius: 10px; width: 44px; height: 44px; }
+.badge { font-weight: 600; letter-spacing: 0; text-transform: none; }
+
+/* ---- Hero ----------------------------------------------------------------------------------------------- */
+.hero { padding-block: clamp(56px, 8vw, 104px) clamp(120px, 12vw, 160px); }
+/* Decorative flight-path arc: sits on the inline-end side and mirrors in RTL. */
+.hero::before {
+  content: ''; position: absolute; inset-block: 0; inset-inline-end: 0; width: min(70%, 760px); pointer-events: none; opacity: 0.5;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400' fill='none' stroke='%23ffffff' stroke-opacity='0.18' stroke-width='1.2' stroke-dasharray='3 7' stroke-linecap='round'%3E%3Cpath d='M-20 360C120 120 330 60 640 150'/%3E%3Cpath d='M-20 400C170 190 380 130 640 230'/%3E%3C/svg%3E") no-repeat center / cover;
+}
+[dir='rtl'] .hero::before, [dir='rtl'] .hero::after { transform: scaleX(-1); }
+.hero-eyebrow { font-size: 0.875rem; font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 8px; border-color: rgba(242, 181, 68, 0.5); }
+.hero h1 { font-weight: 750; letter-spacing: -0.025em; text-wrap: balance; }
+.hero-lead { color: #d6e0f7; }
+.hero-chips { gap: 0.5rem 1.4rem; }
+.hero-visual { border-radius: var(--radius-lg); box-shadow: 0 24px 56px rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.14); }
+.page-header { border-bottom: 3px solid var(--accent-line); }
+.page-header h1 { letter-spacing: -0.02em; }
+
+/* ---- Route explorer & route cards ------------------------------------------------------------------------ */
+.explorer { border-radius: var(--radius-lg); border-top: 3px solid var(--accent-line); }
+.explorer-title { font-size: 1.15rem; font-weight: 650; }
+.route-card { position: relative; overflow: hidden; padding-top: 1.65rem; }
+.route-card::before {
+  content: ''; position: absolute; inset-block-start: 0; inset-inline: 0; height: 3px;
+  background: linear-gradient(to right, var(--royal-600), var(--navy-900) 55%, var(--accent-line));
+}
+[dir='rtl'] .route-card::before { background: linear-gradient(to left, var(--royal-600), var(--navy-900) 55%, var(--accent-line)); }
+.route-card:hover { transform: translateY(-2px); border-color: var(--input-border); }
+.route-iata { font-size: 1.85rem; font-weight: 750; letter-spacing: 0.01em; }
+.route-city { font-size: 0.875rem; }
+.route-code { font-size: 0.8125rem; font-weight: 600; }
+.route-path { gap: 0.5rem; }
+.route-dash { border-top: 1.5px dashed var(--input-border); opacity: 0.7; }
+.route-meta { border-top-color: var(--border); }
+.route-meta div { font-size: 0.9rem; }
+
+/* ---- Application steps with connector ---------------------------------------------------------------------- */
+.step { box-shadow: var(--shadow-sm); }
+.step-num { width: 40px; height: 40px; font-weight: 700; box-shadow: 0 0 0 4px var(--bg-alt), var(--shadow-sm); z-index: 1; }
+/* Connector runs from one number badge to the next. It only exists in the four-column layout, where steps sit on
+   one row; it follows the writing direction through logical offsets. */
+@media (min-width: 1061px) {
+  .step:not(:last-child)::after {
+    content: ''; position: absolute; top: 2px; inset-inline-start: calc(1.25rem + 40px + 8px);
+    width: calc(100% - 40px - 16px + 1.25rem); border-top: 2px dashed var(--input-border); opacity: 0.55; pointer-events: none;
+  }
+}
+@media (max-width: 600px) {
+  /* Single column: a short vertical connector between cards. */
+  .steps { row-gap: 1.75rem; }
+  .step:not(:last-child)::after {
+    content: ''; position: absolute; inset-inline-start: calc(1.25rem + 19px); top: 100%; height: 1.75rem; width: 0;
+    border-inline-start: 2px dashed var(--input-border); opacity: 0.55;
+  }
+}
+
+/* ---- Forms ------------------------------------------------------------------------------------------------ */
+.field { gap: 0.4rem; }
+.field-label { font-size: 0.875rem; font-weight: 600; letter-spacing: 0; }
+.field-hint { font-size: 0.8125rem; }
+.select, .input { border-width: 1px; border-radius: 10px; min-height: 46px; transition: border-color 0.15s, box-shadow 0.15s; }
+.select:hover, .input:hover { border-color: var(--link); }
+.select:focus, .input:focus, .select:focus-visible, .input:focus-visible {
+  outline: 2px solid transparent; /* keeps a visible outline in forced-colors mode */
+  border-color: var(--focus); box-shadow: 0 0 0 3px var(--focus-ring);
+}
+.input[aria-invalid='true'], .input[aria-invalid='true']:focus { border-color: var(--tone-bad-text); }
+.input[aria-invalid='true']:focus { box-shadow: 0 0 0 3px var(--tone-bad-bg); }
+.apply-section { border-radius: var(--radius-md); border-color: var(--border); box-shadow: var(--shadow-sm); padding: 1.35rem 1.5rem 1.5rem; }
+.apply-section legend { font-size: 1.05rem; font-weight: 650; }
+.radio-card { border-width: 1px; border-radius: 10px; font-weight: 550; }
+.radio-card:hover { border-color: var(--link); }
+.radio-card.is-checked { box-shadow: inset 0 0 0 1px var(--link); }
+.radio-card:focus-within { outline: 3px solid var(--focus); outline-offset: 2px; }
+.auth-card { padding: clamp(1.4rem, 4vw, 2rem); box-shadow: var(--shadow-md); border-top: 3px solid var(--accent-line); }
+.auth-links a { font-weight: 600; }
+.notice { border-radius: 10px; }
+.notice-warn { border-color: transparent; border-inline-start: 4px solid var(--tone-warn-text); }
+
+/* ---- Dashboard -------------------------------------------------------------------------------------------- */
+.dash-grid { gap: 1.25rem; }
+.dash-grid .card { border-top: 3px solid var(--border); }
+.dash-grid .card:hover { border-top-color: var(--accent-line); }
+.stat-card p, .stat-card > p { font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 750; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
+.dash-h { font-size: 1.35rem; font-weight: 700; }
+.status-summary { gap: 0.6rem 1.4rem; }
+
+/* ---- Tables ------------------------------------------------------------------------------------------------ */
+.table-wrap { border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
+.table th { font-size: 0.8125rem; font-weight: 650; color: var(--text-muted); background: var(--surface-2); border-bottom: 1px solid var(--input-border); white-space: nowrap; }
+.table td { font-size: 0.9375rem; }
+.table tbody tr { transition: background 0.15s; }
+.table tbody tr:hover { background: var(--row-hover); }
+@media (max-width: 720px) {
+  .table tr { padding: 0.75rem 0; }
+  .table tbody tr:hover { background: transparent; }
+}
+
+/* ---- Accordion & dialogs ----------------------------------------------------------------------------------- */
+.acc-item { box-shadow: var(--shadow-sm); }
+.acc-btn { font-weight: 600; }
+.dialog { border-radius: var(--radius-md); }
+
+/* ---- Footer ------------------------------------------------------------------------------------------------- */
+.site-footer { border-top: 3px solid var(--accent-line); padding-block: clamp(44px, 6vw, 72px) 28px; }
+.footer-grid { gap: clamp(1.5rem, 4vw, 3rem); }
+.footer-brand p { color: var(--footer-text); line-height: 1.65; }
+.footer-h { margin-bottom: 1rem; font-weight: 650; }
+.site-footer ul { gap: 0.65rem; }
+.site-footer a { transition: color 0.15s; }
+.site-footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.footer-disclaimer { border-radius: 10px; margin-top: 2.5rem; }
+.footer-copy { padding-top: 1.25rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 1.75rem; }
+
+/* ---- CTA band ----------------------------------------------------------------------------------------------- */
+.cta-band h2 { letter-spacing: -0.015em; }
+
+/* ---- Small screens: keep generous but tidy touch targets --------------------------------------------------- */
+@media (max-width: 640px) {
+  .card { padding: 1.25rem; }
+  .apply-section { padding: 1.1rem 1rem 1.25rem; }
+  .hero-eyebrow { font-size: 0.8125rem; }
+}

@@ -1,0 +1,74 @@
+/* Demo banner */
+.demo-banner { background: var(--banner-bg); color: var(--banner-text); font-size: 0.82rem; padding-block: 0.5rem; text-align: center; line-height: 1.4; }
+
+/* Header */
+.site-header {
+  position: sticky; top: 0; z-index: 50; background: var(--header-bg);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-bar { display: flex; align-items: center; gap: 1rem; min-height: var(--header-h); }
+.nav-panel { display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0; }
+.nav-links { list-style: none; display: flex; gap: 0; margin-inline: auto; }
+.nav-link {
+  display: block; padding: 0.5rem 0.55rem; border-radius: 999px; text-decoration: none; color: var(--text-muted);
+  font-weight: 600; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s, color 0.2s;
+}
+.nav-link:hover { color: var(--text); background: var(--surface-2); }
+.nav-link.is-active { color: var(--link); background: var(--tone-info-bg); }
+.nav-auth { display: flex; gap: 0.4rem; }
+.nav-auth .btn-sm { padding: 0.55rem 0.95rem; }
+.nav-tools { display: flex; align-items: center; gap: 0.4rem; margin-inline-start: auto; }
+.nav-panel + .nav-tools { margin-inline-start: 0; }
+.icon-btn {
+  width: 42px; height: 42px; display: inline-grid; place-items: center; border-radius: 12px; cursor: pointer;
+  color: var(--text); background: transparent; border: 1.5px solid var(--input-border); transition: background 0.2s;
+}
+.icon-btn:hover { background: var(--surface-2); }
+.nav-toggle { display: none; }
+/* Language selector (Stage 7 part 1). Logical properties keep it correct in LTR and RTL. */
+.lang-select { position: relative; display: inline-flex; align-items: center; color: var(--text); }
+.lang-select > svg { position: absolute; inset-inline-start: 0.65rem; pointer-events: none; }
+.lang-select-input {
+  height: 42px; min-width: 7.2rem; padding-inline: 2rem 0.7rem; font: inherit; font-size: 0.9rem; font-weight: 600;
+  color: var(--text); background: transparent; border: 1.5px solid var(--input-border); border-radius: 12px; cursor: pointer;
+}
+.lang-select-input:hover { background: var(--surface-2); }
+.lang-select-input option { background: var(--surface); color: var(--text); }
+
+/* Tagline lives in the footer; the header stays compact so six links + auth fit. */
+.site-header .logo-tag { display: none; }
+/* Compact (hamburger) layout. Navbar.jsx sets data-compact on the header: always on narrow screens, and on wider
+   ones only when the full desktop bar would not fit (it depends on language, sign-in state and font). */
+.site-header[data-compact='true'] .nav-bar { justify-content: space-between; }
+.site-header[data-compact='true'] .nav-tools { margin-inline-start: auto; }
+.site-header[data-compact='true'] .nav-toggle { display: inline-grid; }
+.site-header[data-compact='true'] .nav-panel {
+  display: none; position: absolute; inset-inline: 0; top: 100%; flex-direction: column; align-items: stretch;
+  gap: 1rem; padding: 1rem var(--gutter) 1.5rem; background: var(--surface); border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-lg); max-height: calc(100vh - var(--header-h)); max-height: calc(100dvh - var(--header-h)); overflow-y: auto; overscroll-behavior: contain;
+}
+.site-header[data-compact='true'] .nav-panel[data-open='true'] { display: flex; }
+.site-header[data-compact='true'] .nav-links { flex-direction: column; margin: 0; gap: 0.2rem; }
+.site-header[data-compact='true'] .nav-link { padding: 0.8rem 1rem; border-radius: var(--radius-sm); font-size: 1rem; }
+.site-header[data-compact='true'] .nav-auth { flex-direction: column; }
+.site-header[data-compact='true'] .nav-auth .btn { width: 100%; padding-block: 0.85rem; }
+/* Header shares the page container width (see tokens.css). */
+.site-header .nav-bar { max-width: var(--container); } /* same width and gutter as page content, so the logo and the page edge align on wide screens */
+
+/* Footer */
+.site-footer { background: var(--footer-bg); color: var(--footer-text); padding-block: clamp(40px, 6vw, 64px) 28px; margin-top: 0; }
+.footer-grid { display: grid; gap: 2rem; grid-template-columns: 1.6fr 1fr 1fr 1fr; }
+.footer-brand p { margin-top: 1rem; max-width: 34ch; font-size: 0.95rem; }
+.footer-h { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--footer-heading); margin-bottom: 0.9rem; }
+.site-footer ul { list-style: none; display: grid; gap: 0.55rem; }
+.site-footer a { color: var(--footer-text); text-decoration: none; }
+.site-footer a:hover { color: #fff; text-decoration: underline; }
+.site-footer :focus-visible { outline-color: #8fb2ff; }
+.footer-disclaimer {
+  margin-top: 2.2rem; padding: 1rem 1.25rem; border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); font-size: 0.9rem; color: #d6e0f7;
+}
+.footer-copy { margin: 1.4rem 0 0; font-size: 0.85rem; color: #93a4cc; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }

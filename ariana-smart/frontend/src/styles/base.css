@@ -1,0 +1,48 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: var(--lh-body);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg { max-width: 100%; display: block; }
+h1, h2, h3, h4 { margin: 0 0 0.5em; line-height: var(--lh-heading); letter-spacing: -0.01em; color: var(--text); }
+h1 { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 800; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 750; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0 0 1em; }
+a { color: var(--link); text-underline-offset: 3px; }
+ul, ol { margin: 0; padding: 0; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+main:focus { outline: none; }
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; inset-inline-start: 12px; top: -60px; z-index: 100;
+  background: var(--btn-primary-bg); color: var(--btn-primary-text);
+  padding: 10px 16px; border-radius: var(--radius-sm); text-decoration: none; font-weight: 600;
+}
+.skip-link:focus { top: 12px; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+/* Directional icons mirror automatically in RTL */
+[dir='rtl'] .icon-flip { transform: scaleX(-1); }
+
+/* Arabic-script text (Dari, Pashto): tracking and upper-casing are Latin typography. Letter-spacing breaks the
+   joined letter shapes, and text-transform does nothing useful, so both are switched off for every element
+   whose language is Dari or Pashto. (!important is deliberate: components set these with class selectors.) */
+*:lang(prs), *:lang(pus), *:lang(fa), *:lang(ps) { letter-spacing: normal !important; text-transform: none !important; }
+
+/* Latin identifiers inside Arabic-script text (e-mail, references, codes): isolated, never reordered. */
+.ltr-isolate { unicode-bidi: isolate; }
+/* Numbers/codes that must keep a stable look in tables and cards. */
+.route-code, .route-iata, .ref-number { font-variant-numeric: tabular-nums; }
